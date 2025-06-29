@@ -1,5 +1,7 @@
-package iroma.app.mytesters.View
+package iroma.app.mytesters.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -39,6 +41,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import iroma.app.mytesters.ui.theme.MyTestersTheme
+import androidx.compose.ui.platform.LocalContext
+import iroma.app.mytesters.Model.TestConfig
 
 class CreateTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +52,6 @@ class CreateTestActivity : AppCompatActivity() {
             MyTestersTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     CreateGreeting(
-                        name = "Android",
                         modifier = Modifier.padding(innerPadding),
                     )
                 }
@@ -58,7 +61,8 @@ class CreateTestActivity : AppCompatActivity() {
 }
 
 @Composable
-fun CreateGreeting(name: String, modifier: Modifier = Modifier) {
+fun CreateGreeting(modifier: Modifier = Modifier) {
+    val context = LocalContext.current // Получаем контекст
     var testName by remember { mutableStateOf("") }
     var testCount by remember { mutableStateOf("") }
     var advancedTaskCount by remember { mutableStateOf("") }
@@ -81,11 +85,18 @@ fun CreateGreeting(name: String, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.weight(1f))
 
         ContinueButton(onClick = {
-            // Здесь логика продолжения
-            // перейти на другой экран
-            // создать oblect class и сохранить данные, pattern repository ( изучить )
-            // на новом экране после заполнения данных записать в json файл
-            // логика во view model, паттерн MVVM, архитектурный паттерн (presentetion, data, domen)
+            val testConfig = TestConfig(
+                testName = testName,
+                testCount = testCount.toIntOrNull() ?: 0,
+                answerOptionsCount = selectedOption.toInt(),
+                advancedTaskCount = advancedTaskCount.toIntOrNull() ?: 0
+            )
+
+            val intent = Intent(context, FillingTestActivity::class.java).apply {
+                putExtra("TEST_CONFIG_KEY", testConfig)
+            }
+            context.startActivity(intent)
+            (context as? Activity)?.finish()
         })
     }
 }
@@ -153,7 +164,7 @@ private fun BottomSection(
     onAdvancedTaskCountChange: (String) -> Unit
 ) {
     SectionBox {
-        GreetingItem(text = "Количество заданий повышенной сложности")
+        GreetingItem(text = "Количество заданий без варинатов ответа")
         InputField(
             value = advancedTaskCount,
             onValueChange = {newValue ->

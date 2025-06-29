@@ -18,8 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import iroma.app.mytesters.View.CheckTestsActivity
-import iroma.app.mytesters.View.CreateTestActivity
+import iroma.app.mytesters.view.CheckTestsActivity
+import iroma.app.mytesters.view.CreateTestActivity
 import iroma.app.mytesters.ui.theme.MyTestersTheme
 
 class MainActivity : ComponentActivity() {

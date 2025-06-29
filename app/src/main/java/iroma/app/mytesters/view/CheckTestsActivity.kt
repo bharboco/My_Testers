@@ -1,4 +1,4 @@
-package iroma.app.mytesters.View
+package iroma.app.mytesters.view
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
