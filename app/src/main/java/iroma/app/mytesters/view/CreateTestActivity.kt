@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import iroma.app.mytesters.ui.theme.MyTestersTheme
 import androidx.compose.ui.platform.LocalContext
-import iroma.app.mytesters.Model.TestConfig
+import iroma.app.mytesters.model.TestConfig
 
 class CreateTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

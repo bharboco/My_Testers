@@ -1,4 +1,4 @@
-package iroma.app.mytesters.Model
+package iroma.app.mytesters.model
 import android.content.Context
 import com.google.gson.Gson
 import java.io.File

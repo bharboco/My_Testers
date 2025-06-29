@@ -1,4 +1,4 @@
-package iroma.app.mytesters.Model
+package iroma.app.mytesters.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
