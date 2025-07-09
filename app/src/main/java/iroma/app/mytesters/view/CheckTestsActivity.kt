@@ -43,3 +43,5 @@ fun CheckGreeting(name: String, modifier: Modifier = Modifier) {
             .background(Color.LightGray), text = "2")
     }
 }
+
+

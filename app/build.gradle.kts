@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-parcelize")
+//    id("kotlin-kapt")
 }
 
 android {
@@ -69,6 +70,10 @@ dependencies {
     implementation(libs.androidx.activity)
 
     implementation("com.google.code.gson:gson:2.10.1")
+//    implementation("androidx.room:room-runtime:2.6.1")
+//    implementation(libs.androidx.room.runtime.android)
+//    kapt ("androidx.room:room-compiler:2.6.1")
+//    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -195,7 +195,7 @@ private fun ContinueButton(onClick: () -> Unit) {
 }
 
 @Composable
-private fun GreetingItem(text: String) {
+fun GreetingItem(text: String) {
     Text(
         text = text,
         fontSize = 16.sp,
@@ -220,7 +220,7 @@ private fun InputField(
 }
 
 @Composable
-private fun RadioButtonOption(
+fun RadioButtonOption(
     text: String,
     selected: Boolean,
     onClick: () -> Unit
@@ -232,7 +232,7 @@ private fun RadioButtonOption(
 }
 
 @Composable
-private fun SectionBox(content: @Composable () -> Unit) {
+fun SectionBox(content: @Composable () -> Unit) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = Color.LightGray,

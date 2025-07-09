@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier,checkTests: () -> Unit, createTests: () -> Unit) {
+private fun Greeting(name: String, modifier: Modifier = Modifier,checkTests: () -> Unit, createTests: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(modifier = Modifier
             .clickable { checkTests()  }
