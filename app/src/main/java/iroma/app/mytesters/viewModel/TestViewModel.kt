@@ -1,35 +1,23 @@
 package iroma.app.mytesters.viewModel
 
-//import androidx.compose.runtime.mutableStateMapOf
-//import androidx.compose.runtime.snapshots.SnapshotStateMap
-//import androidx.lifecycle.ViewModel
-//import androidx.lifecycle.viewModelScope
-//import iroma.app.mytesters.model.AnswerDao
-//import iroma.app.mytesters.model.AnswerEntity
-//import iroma.app.mytesters.model.TestConfig
-//import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.CreationExtras
+import iroma.app.mytesters.model.AppDatabase
 
-//class TestViewModel(private val answerDao: AnswerDao) : ViewModel() {
-//    private val _answers = mutableStateMapOf<Int, String>()
-//    val answers: SnapshotStateMap<Int, String> = _answers
-//
-//    fun saveAnswer(questionId: Int, answer: String) {
-//        viewModelScope.launch {
-//            answerDao.insert(
-//                AnswerEntity(
-//                    questionId = questionId,
-//                    answerType = if (questionId > testConfig.testCount) "text" else "radio",
-//                    answerValue = answer
-//                )
-//            )
-//            _answers[questionId] = answer
-//        }
-//    }
-//
-//    suspend fun loadInitialData(testConfig: TestConfig) {
-//        answerDao.getByQuestionRange(1, testConfig.testCount + testConfig.advancedTaskCount)
-//            .forEach { answer ->
-//                _answers[answer.questionId] = answer.answerValue
-//            }
-//    }
-//}
+class TestViewModel(database: AppDatabase) : ViewModel() {
+    val itemsList = database.dao.getAllItems()
+
+    companion object{
+        val factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory{
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(
+                modelClass: Class<T>,
+                extras: CreationExtras): T {
+                val database = (checkNotNull(extras[APPLICATION_KEY]) as App).database
+                return TestViewModel(database) as T
+            }
+        }
+    }
+}

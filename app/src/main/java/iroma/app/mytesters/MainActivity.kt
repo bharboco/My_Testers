@@ -14,13 +14,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import iroma.app.mytesters.view.CheckTestsActivity
 import iroma.app.mytesters.view.CreateTestActivity
 import iroma.app.mytesters.ui.theme.MyTestersTheme
+import iroma.app.mytesters.viewModel.TestViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,22 +54,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Greeting(name: String, modifier: Modifier = Modifier,checkTests: () -> Unit, createTests: () -> Unit) {
+fun Greeting(testViewModel: TestViewModel = viewModel(factory = TestViewModel.factory),name: String, modifier: Modifier = Modifier,checkTests: () -> Unit, createTests: () -> Unit) {
+    val itemsList= testViewModel.itemsList.collectAsState(initial = emptyList())
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(modifier = Modifier
-            .clickable { checkTests()  }
+            .clickable { checkTests() }
             .background(Color.LightGray) ,text = "Проверить тест")
         Text(modifier = Modifier
-            .clickable { createTests()  }
+            .clickable { createTests() }
             .background(Color.LightGray), text = "Создать тест")
-    }
-}
-
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    MyTestersTheme {
-        Greeting("Android", createTests = {}, checkTests = {})
     }
 }

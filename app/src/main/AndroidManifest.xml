@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".viewModel.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,10 +24,6 @@
         <activity
             android:name=".view.CreateTestActivity"
             android:exported="false" />
-        <activity
-            android:name=".CreateTestsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyTesters" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
